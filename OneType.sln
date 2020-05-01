@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneType", "src\OneType\OneT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneType.Interface", "src\OneType.Interface\OneType.Interface.csproj", "{77665988-6395-4958-838F-F05404406F11}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneType.Tests", "src\OneType.Tests\OneType.Tests.csproj", "{084A703D-BA35-48A5-BE7B-CB320C38D62C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{77665988-6395-4958-838F-F05404406F11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77665988-6395-4958-838F-F05404406F11}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77665988-6395-4958-838F-F05404406F11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{084A703D-BA35-48A5-BE7B-CB320C38D62C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{084A703D-BA35-48A5-BE7B-CB320C38D62C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{084A703D-BA35-48A5-BE7B-CB320C38D62C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{084A703D-BA35-48A5-BE7B-CB320C38D62C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
