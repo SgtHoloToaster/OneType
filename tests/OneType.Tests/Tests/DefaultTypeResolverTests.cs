@@ -66,6 +66,25 @@ namespace OneType.Tests.Tests
         }
 
         [Fact]
+        public void CanGetProperty()
+        {
+            // arrange 
+            var testObject = new User
+            {
+                Name = new Name("John", "Smith")
+            };
+
+            var objectProperty = new ObjectProperty(typeof(Name), nameof(User.Name));
+            var target = new DefaultTypeResolver();
+
+            // act
+            var result = target.GetValue(testObject, objectProperty);
+
+            // assert
+            Assert.Equal(testObject.Name, result);
+        }
+
+        [Fact]
         public void CanGetPropertyValueByName()
         {
             // arrange 

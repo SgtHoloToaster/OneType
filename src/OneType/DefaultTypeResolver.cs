@@ -27,7 +27,7 @@ namespace OneType
 
         public object GetValue(object obj, ObjectProperty property)
         {
-            throw new NotImplementedException();
+            return GetValue(obj, property.Name);
         }
 
         public object GetValue(object obj, string propertyPath)
