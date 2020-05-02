@@ -44,7 +44,9 @@ namespace OneType
 
         public object GetValue(object obj)
         {
-            throw new NotImplementedException();
+            return obj.GetType()
+                .GetProperty(Name)
+                .GetValue(obj);
         }
     }
 }
