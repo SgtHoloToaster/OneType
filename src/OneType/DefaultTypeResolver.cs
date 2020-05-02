@@ -13,9 +13,10 @@ namespace OneType
             throw new NotImplementedException();
         }
 
-        public IEnumerable<ObjectProperty> GetProperties<T>(T obj)
+        public IEnumerable<ObjectProperty> GetProperties(object obj)
         {
-            return typeof(T).GetProperties()
+            return obj.GetType()
+                .GetProperties()
                 .Select(p => new ObjectProperty(p.PropertyType, p.Name))
                 .ToList();
         }

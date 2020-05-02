@@ -6,7 +6,7 @@ namespace OneType.Interface
 {
     public interface ITypeResolver
     {
-        IEnumerable<ObjectProperty> GetProperties<T>(T obj);
+        IEnumerable<ObjectProperty> GetProperties(object obj);
 
         object GetValue(object obj, ObjectProperty property);
 
