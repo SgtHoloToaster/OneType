@@ -23,22 +23,5 @@ namespace OneType
             var propertyInfo = obj.GetType().GetProperty(propertyName);
             return new DefaultObjectProperty(propertyInfo.PropertyType, propertyInfo.Name);
         }
-
-        public object GetValue(object obj, DefaultObjectProperty property)
-        {
-            return GetValue(obj, property.Name);
-        }
-
-        public object GetValue(object obj, string propertyPath)
-        {
-            return obj.GetType()
-                .GetProperty(propertyPath)
-                .GetValue(obj);
-        }
-
-        public object GetValue(object obj, IObjectProperty property)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
