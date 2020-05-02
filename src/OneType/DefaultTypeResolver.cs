@@ -1,5 +1,4 @@
 ﻿using OneType.Interface;
-using OneType.Interface.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,19 +12,19 @@ namespace OneType
             throw new NotImplementedException();
         }
 
-        public IEnumerable<ObjectProperty> GetProperties(object obj) =>
+        public IEnumerable<IObjectProperty> GetProperties(object obj) =>
             obj.GetType()
                 .GetProperties()
-                .Select(p => new ObjectProperty(p.PropertyType, p.Name))
+                .Select(p => new DefaultObjectProperty(p.PropertyType, p.Name))
                 .ToList();
 
-        public ObjectProperty GetProperty(object obj, string propertyName)
+        public IObjectProperty GetProperty(object obj, string propertyName)
         {
             var propertyInfo = obj.GetType().GetProperty(propertyName);
-            return new ObjectProperty(propertyInfo.PropertyType, propertyInfo.Name);
+            return new DefaultObjectProperty(propertyInfo.PropertyType, propertyInfo.Name);
         }
 
-        public object GetValue(object obj, ObjectProperty property)
+        public object GetValue(object obj, DefaultObjectProperty property)
         {
             return GetValue(obj, property.Name);
         }
@@ -35,6 +34,11 @@ namespace OneType
             return obj.GetType()
                 .GetProperty(propertyPath)
                 .GetValue(obj);
+        }
+
+        public object GetValue(object obj, IObjectProperty property)
+        {
+            throw new NotImplementedException();
         }
     }
 }

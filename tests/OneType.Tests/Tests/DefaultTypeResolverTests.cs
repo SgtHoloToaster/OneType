@@ -25,7 +25,7 @@ namespace OneType.Tests.Tests
 
         private readonly static GetPropertiesAssert ResultedPropertiesHaveCorrectNames = new GetPropertiesAssert((expected, actual) =>
         {
-            IOrderedEnumerable<string> getNamesOrdered(IEnumerable<ObjectProperty> objectProperties) =>
+            IOrderedEnumerable<string> getNamesOrdered(IEnumerable<DefaultObjectProperty> objectProperties) =>
                 objectProperties.Select(p => p.Name)
                     .OrderBy(pn => pn);
 
@@ -38,24 +38,24 @@ namespace OneType.Tests.Tests
 
         private readonly static GetPropertiesAssert ResultedPropertiesHaveCorrectTypes = new GetPropertiesAssert((expected, actual) =>
         {
-            IOrderedEnumerable<Type> getTypesOrdered(IEnumerable<ObjectProperty> objectProperties) =>
+            IOrderedEnumerable<Type> getTypesOrdered(IEnumerable<DefaultObjectProperty> objectProperties) =>
                 objectProperties.Select(p => p.Type)
                     .OrderBy(pt => pt.Name);
 
             Assert.True(getTypesOrdered(expected).SequenceEqual(getTypesOrdered(actual)));
         });
 
-        private delegate void GetPropertiesAssert(IEnumerable<ObjectProperty> expected, IEnumerable<ObjectProperty> actual);
+        private delegate void GetPropertiesAssert(IEnumerable<DefaultObjectProperty> expected, IEnumerable<DefaultObjectProperty> actual);
         private void TestGetPropertiesMethod(GetPropertiesAssert assert)
         {
             // arrange
             var testObj = new User();
             var target = new DefaultTypeResolver();
-            var expectedProperties = new List<ObjectProperty>
+            var expectedProperties = new List<DefaultObjectProperty>
             {
-                new ObjectProperty(typeof(Name), nameof(User.Name)),
-                new ObjectProperty(typeof(string), nameof(User.Email)),
-                new ObjectProperty(typeof(int), nameof(User.Age))
+                new DefaultObjectProperty(typeof(Name), nameof(User.Name)),
+                new DefaultObjectProperty(typeof(string), nameof(User.Email)),
+                new DefaultObjectProperty(typeof(int), nameof(User.Age))
             };
 
             // act
@@ -74,7 +74,7 @@ namespace OneType.Tests.Tests
                 Name = new Name("John", "Smith")
             };
 
-            var objectProperty = new ObjectProperty(typeof(Name), nameof(User.Name));
+            var objectProperty = new DefaultObjectProperty(typeof(Name), nameof(User.Name));
             var target = new DefaultTypeResolver();
 
             // act
@@ -120,7 +120,7 @@ namespace OneType.Tests.Tests
 
         private static readonly GetPropertyAssert ResultedPropertyHasCorrectName = new GetPropertyAssert((expected, result) => Assert.Equal(expected.Name, result.Name));
 
-        private delegate void GetPropertyAssert(ObjectProperty expected, ObjectProperty actual);
+        private delegate void GetPropertyAssert(DefaultObjectProperty expected, DefaultObjectProperty actual);
         private void TestGetPropertyMethod(GetPropertyAssert assert)
         {
             // arrange
@@ -129,7 +129,7 @@ namespace OneType.Tests.Tests
                 Email = "somecool@mail.com"
             };
 
-            var expectedProperty = new ObjectProperty(typeof(string), nameof(User.Email));
+            var expectedProperty = new DefaultObjectProperty(typeof(string), nameof(User.Email));
             var target = new DefaultTypeResolver();
 
             // act

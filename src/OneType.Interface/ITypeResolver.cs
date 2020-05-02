@@ -6,13 +6,9 @@ namespace OneType.Interface
 {
     public interface ITypeResolver
     {
-        ObjectProperty GetProperty(object obj, string propertyName);
+        IObjectProperty GetProperty(object obj, string propertyName);
 
-        IEnumerable<ObjectProperty> GetProperties(object obj);
-
-        object GetValue(object obj, ObjectProperty property);
-
-        object GetValue(object obj, string propertyPath);
+        IEnumerable<IObjectProperty> GetProperties(object obj);
 
         int GetHashCode(object obj);
     }

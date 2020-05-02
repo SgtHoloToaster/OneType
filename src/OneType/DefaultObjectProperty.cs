@@ -1,14 +1,15 @@
-﻿using System;
+﻿using OneType.Interface;
+using System;
 
-namespace OneType.Interface.Models
+namespace OneType
 {
-    public class ObjectProperty
+    public class DefaultObjectProperty : IObjectProperty
     {
-        public Type Type { get; set; }
+        public Type Type { get; }
 
-        public string Name { get; set; }
+        public string Name { get; }
 
-        public ObjectProperty(Type type, string name)
+        public DefaultObjectProperty(Type type, string name)
         {
             Type = type;
             Name = name;
@@ -27,9 +28,9 @@ namespace OneType.Interface.Models
         }
 
         public override bool Equals(object obj) =>
-            Equals(obj as ObjectProperty);
+            Equals(obj as DefaultObjectProperty);
 
-        public bool Equals(ObjectProperty property)
+        public bool Equals(DefaultObjectProperty property)
         {
             if (property == null)
                 return false;
@@ -39,6 +40,11 @@ namespace OneType.Interface.Models
 
             return Equals(property.Type, Type)
                 && string.Equals(property.Name, Name);
+        }
+
+        public object GetValue(object obj)
+        {
+            throw new NotImplementedException();
         }
     }
 }
