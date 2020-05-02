@@ -2,6 +2,7 @@
 using OneType.Interface.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OneType
 {
@@ -12,9 +13,11 @@ namespace OneType
             throw new NotImplementedException();
         }
 
-        public IEnumerable<ObjectProperty> GetProperties(Type type)
+        public IEnumerable<ObjectProperty> GetProperties<T>(T obj)
         {
-            throw new NotImplementedException();
+            return typeof(T).GetProperties()
+                .Select(p => new ObjectProperty(p.PropertyType, p.Name))
+                .ToList();
         }
 
         public object GetValue(object obj, ObjectProperty property)
