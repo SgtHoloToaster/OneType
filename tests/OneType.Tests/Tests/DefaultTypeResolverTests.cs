@@ -74,7 +74,6 @@ namespace OneType.Tests.Tests
                 Age = 26
             };
 
-            var objectProperty = new ObjectProperty(typeof(int), nameof(User.Age));
             var target = new DefaultTypeResolver();
 
             // act
@@ -82,6 +81,43 @@ namespace OneType.Tests.Tests
 
             // assert
             Assert.Equal(testObject.Age, result);
+        }
+
+        [Fact]
+        public void CanGetObjectProperty() =>
+            TestGetPropertyMethod(ResultIsNotNull);
+
+        private static readonly GetPropertyAssert ResultIsNotNull = new GetPropertyAssert((_, result) => Assert.NotNull(result));
+
+        [Fact]
+        public void GetPropertyMethodResultHasCorrectType() =>
+            TestGetPropertyMethod(ResultedPropertyHasCorrectType);
+
+        private static readonly GetPropertyAssert ResultedPropertyHasCorrectType = new GetPropertyAssert((expected, result) => Assert.Equal(expected.Type, result.Type));
+
+        [Fact]
+        public void GetPropertyMethodResultHasCorrectName() =>
+            TestGetPropertyMethod(ResultedPropertyHasCorrectName);
+
+        private static readonly GetPropertyAssert ResultedPropertyHasCorrectName = new GetPropertyAssert((expected, result) => Assert.Equal(expected.Name, result.Name));
+
+        private delegate void GetPropertyAssert(ObjectProperty expected, ObjectProperty actual);
+        private void TestGetPropertyMethod(GetPropertyAssert assert)
+        {
+            // arrange
+            var testObject = new User
+            {
+                Email = "somecool@mail.com"
+            };
+
+            var expectedProperty = new ObjectProperty(typeof(string), nameof(User.Email));
+            var target = new DefaultTypeResolver();
+
+            // act
+            var result = target.GetProperty(testObject, nameof(User.Email));
+
+            // assert
+            assert(expectedProperty, result);
         }
     }
 }
