@@ -10,6 +10,8 @@ namespace OneType.Interface
 
         object GetValue(object obj, ObjectProperty property);
 
+        object GetValue(object obj, string propertyPath);
+
         int GetHashCode(object obj);
     }
 }

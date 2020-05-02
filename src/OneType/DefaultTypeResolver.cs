@@ -13,17 +13,22 @@ namespace OneType
             throw new NotImplementedException();
         }
 
-        public IEnumerable<ObjectProperty> GetProperties(object obj)
-        {
-            return obj.GetType()
+        public IEnumerable<ObjectProperty> GetProperties(object obj) =>
+            obj.GetType()
                 .GetProperties()
                 .Select(p => new ObjectProperty(p.PropertyType, p.Name))
                 .ToList();
-        }
 
         public object GetValue(object obj, ObjectProperty property)
         {
             throw new NotImplementedException();
+        }
+
+        public object GetValue(object obj, string propertyPath)
+        {
+            return obj.GetType()
+                .GetProperty(propertyPath)
+                .GetValue(obj);
         }
     }
 }

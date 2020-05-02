@@ -64,5 +64,24 @@ namespace OneType.Tests.Tests
             // assert
             assert(expectedProperties, result);
         }
+
+        [Fact]
+        public void CanGetPropertyValueByName()
+        {
+            // arrange 
+            var testObject = new User
+            {
+                Age = 26
+            };
+
+            var objectProperty = new ObjectProperty(typeof(int), nameof(User.Age));
+            var target = new DefaultTypeResolver();
+
+            // act
+            var result = target.GetValue(testObject, nameof(User.Age));
+
+            // assert
+            Assert.Equal(testObject.Age, result);
+        }
     }
 }
