@@ -1,4 +1,4 @@
-﻿using OneType.Interface.Models;
+﻿using OneType.Interface;
 using OneType.Tests.Models;
 using System;
 using System.Collections.Generic;
@@ -25,7 +25,7 @@ namespace OneType.Tests.Tests
 
         private readonly static GetPropertiesAssert ResultedPropertiesHaveCorrectNames = new GetPropertiesAssert((expected, actual) =>
         {
-            IOrderedEnumerable<string> getNamesOrdered(IEnumerable<DefaultObjectProperty> objectProperties) =>
+            IOrderedEnumerable<string> getNamesOrdered(IEnumerable<IObjectProperty> objectProperties) =>
                 objectProperties.Select(p => p.Name)
                     .OrderBy(pn => pn);
 
@@ -38,20 +38,20 @@ namespace OneType.Tests.Tests
 
         private readonly static GetPropertiesAssert ResultedPropertiesHaveCorrectTypes = new GetPropertiesAssert((expected, actual) =>
         {
-            IOrderedEnumerable<Type> getTypesOrdered(IEnumerable<DefaultObjectProperty> objectProperties) =>
+            IOrderedEnumerable<Type> getTypesOrdered(IEnumerable<IObjectProperty> objectProperties) =>
                 objectProperties.Select(p => p.Type)
                     .OrderBy(pt => pt.Name);
 
             Assert.True(getTypesOrdered(expected).SequenceEqual(getTypesOrdered(actual)));
         });
 
-        private delegate void GetPropertiesAssert(IEnumerable<DefaultObjectProperty> expected, IEnumerable<DefaultObjectProperty> actual);
+        private delegate void GetPropertiesAssert(IEnumerable<IObjectProperty> expected, IEnumerable<IObjectProperty> actual);
         private void TestGetPropertiesMethod(GetPropertiesAssert assert)
         {
             // arrange
             var testObj = new User();
             var target = new DefaultTypeResolver();
-            var expectedProperties = new List<DefaultObjectProperty>
+            var expectedProperties = new List<IObjectProperty>
             {
                 new DefaultObjectProperty(typeof(Name), nameof(User.Name)),
                 new DefaultObjectProperty(typeof(string), nameof(User.Email)),
@@ -120,7 +120,7 @@ namespace OneType.Tests.Tests
 
         private static readonly GetPropertyAssert ResultedPropertyHasCorrectName = new GetPropertyAssert((expected, result) => Assert.Equal(expected.Name, result.Name));
 
-        private delegate void GetPropertyAssert(DefaultObjectProperty expected, DefaultObjectProperty actual);
+        private delegate void GetPropertyAssert(IObjectProperty expected, IObjectProperty actual);
         private void TestGetPropertyMethod(GetPropertyAssert assert)
         {
             // arrange

@@ -1,6 +1,4 @@
-﻿using OneType.Interface.Models;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace OneType.Interface
 {
