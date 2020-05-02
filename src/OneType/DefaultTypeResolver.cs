@@ -19,6 +19,12 @@ namespace OneType
                 .Select(p => new ObjectProperty(p.PropertyType, p.Name))
                 .ToList();
 
+        public ObjectProperty GetProperty(object obj, string propertyName)
+        {
+            var propertyInfo = obj.GetType().GetProperty(propertyName);
+            return new ObjectProperty(propertyInfo.PropertyType, propertyInfo.Name);
+        }
+
         public object GetValue(object obj, ObjectProperty property)
         {
             throw new NotImplementedException();
