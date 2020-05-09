@@ -8,6 +8,7 @@ namespace OneType.Interface
 
         IEnumerable<IObjectProperty> GetProperties(object obj);
 
-        int GetHashCode(object obj);
+        // TODO: maybe move it to a separate universal equalityComparer
+        int GetObjectHashCode(object obj);
     }
 }

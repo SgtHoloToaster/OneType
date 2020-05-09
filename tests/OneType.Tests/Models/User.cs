@@ -4,6 +4,7 @@ using System.Text;
 
 namespace OneType.Tests.Models
 {
+    [Serializable]
     public struct Name
     {
         public Name(string firstName, string secondName)
@@ -19,6 +20,7 @@ namespace OneType.Tests.Models
         public string FullName => $"{FirstName} {SecondName}";
     }
 
+    [Serializable]
     public class User
     {
         public Name Name { get; set; }

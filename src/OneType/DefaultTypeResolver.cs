@@ -7,7 +7,7 @@ namespace OneType
 {
     public class DefaultTypeResolver : ITypeResolver
     {
-        public int GetHashCode(object obj)
+        public int GetObjectHashCode(object obj)
         {
             throw new NotImplementedException();
         }

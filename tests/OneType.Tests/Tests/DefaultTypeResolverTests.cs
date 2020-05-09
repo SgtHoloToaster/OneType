@@ -1,4 +1,5 @@
 ﻿using OneType.Interface;
+using OneType.Tests.Helpers;
 using OneType.Tests.Models;
 using System;
 using System.Collections.Generic;
@@ -100,6 +101,55 @@ namespace OneType.Tests.Tests
 
             // assert
             assert(expectedProperty, result);
+        }
+
+        [Fact]
+        public void ProducesTheSameHashCodeForEqualModels()
+        {
+            // arrange
+            var first = new User
+            {
+                Name = new Name("Richard", "Sult"),
+                Age = 52,
+                Email = "tim_salt@mail.com"
+            };
+
+            var second = ObjectCloner.DeepClone(first);
+            var target = new DefaultTypeResolver();
+
+            // act
+            var firstHashCode = target.GetObjectHashCode(first);
+            var secondHashCode = target.GetObjectHashCode(second);
+
+            // assert
+            Assert.Equal(firstHashCode, secondHashCode);
+        }
+
+        [Fact]
+        public void MightProduceDifferentHashCodesForNonEqualModels()
+        {
+            // arrange
+            var first = new User
+            {
+                Name = new Name("Chad", "Smith"),
+                Age = 58,
+                Email = "chad_rhcp@mail.com"
+            };
+
+            var second = new User
+            {
+                Name = new Name("Will", "Ferrel"),
+                Age = 52,
+                Email = "w_ferrel@yahoo.com"
+            };
+            var target = new DefaultTypeResolver();
+
+            // act
+            var firstHashCode = target.GetObjectHashCode(first);
+            var secondHashCode = target.GetObjectHashCode(second);
+
+            // assert
+            Assert.NotEqual(firstHashCode, secondHashCode);
         }
     }
 }
