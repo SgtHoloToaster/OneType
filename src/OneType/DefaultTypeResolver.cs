@@ -9,7 +9,25 @@ namespace OneType
     {
         public int GetObjectHashCode(object obj)
         {
-            throw new NotImplementedException();
+            if (obj == null)
+                return int.MinValue;
+
+            var type = obj.GetType();
+            if (type.IsPrimitive || type == typeof(string))
+                return obj.GetHashCode();
+
+            var properties = type.GetProperties();
+            var hash = 17;
+            unchecked
+            {
+                foreach (var property in properties)
+                {
+                    var value = property.GetValue(obj);
+                    hash *= 23 + GetObjectHashCode(value);
+                }
+            }
+
+            return hash;
         }
 
         public IEnumerable<IObjectProperty> GetProperties(object obj) =>
