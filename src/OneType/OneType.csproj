@@ -10,8 +10,16 @@
     <Company>Mikhail Podolskiy</Company>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\OneType.Interface\OneType.Interface.csproj" />
-  </ItemGroup>
-
+  <Choose>
+    <When Condition="'$(Configuration)' != 'Release'">
+      <ItemGroup>
+        <ProjectReference Include="..\OneType.Interface\OneType.Interface.csproj" />
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+        <PackageReference Include="OneType.Interface" Version="[0.0.1]" />
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
 </Project>
