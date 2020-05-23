@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
-    <Version>0.0.1</Version>
+    <Version>0.0.2</Version>
     <Authors>Mikhail Podolskiy</Authors>
     <Company>Mikhail Podolskiy</Company>
     <Description>A simple abstraction that gives the same interface for different types</Description>
